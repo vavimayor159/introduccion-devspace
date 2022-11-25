@@ -46,5 +46,3 @@ En Linux - https://www.devspace.sh/docs/getting-started/installation?x0=5
 En MacOS - https://www.devspace.sh/docs/getting-started/installation?x0=4
 
 En Windows - https://www.devspace.sh/docs/getting-started/installation?x0=6
-
-
