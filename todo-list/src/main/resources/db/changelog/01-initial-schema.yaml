@@ -1,0 +1,21 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: initialSchema
+      author: ivan.garcia
+
+      changes:
+        - createTable:
+            tableName: todos
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: todos_pkey
+                    nullable: false
+              - column:
+                  name: todo
+                  type: TEXT
