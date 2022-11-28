@@ -19,28 +19,13 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: 411719562396.dkr.ecr.us-east-1.amazonaws.com/react-front:fed-dedicated-3.0.0.0
+      - image: front:devspace-intro
         imagePullPolicy: Always
         lifecycle:
             preStop:
               exec:
                 command: ["/usr/sbin/nginx","-s","quit"]
         name: react-front
-        readinessProbe:
-          tcpSocket:
-            port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 3
-          successThreshold: 1
-          failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            path: /ping
-            port: 80
-          initialDelaySeconds: 15
-          periodSeconds: 15
-          successThreshold: 1
-          failureThreshold: 3
       imagePullSecrets:
         - name: regsecret
       restartPolicy: Always

@@ -1,4 +1,6 @@
 version: v2beta1
+localRegistry:
+  enabled: true
 name: introduccion-devspace
 
 # This is a list of `pipelines` that DevSpace can execute (you can define your own)
@@ -20,11 +22,17 @@ pipelines:
 # We recommend to skip image building during development (devspace dev) as much as possible
 images:
   front:
-    image: username/front
+    image: front
+    tags:
+    - devspace-intro
     dockerfile: ./react-front/Dockerfile
+    context: ./react-front
   back:
-    image: username/back
+    image: back
+    tags: 
+    - devspace-intro
     dockerfile: ./todo-list/Dockerfile
+    context: ./todo-list
 
 # This is a list of `deployments` that DevSpace can create for this project
 deployments:
@@ -42,7 +50,7 @@ deployments:
   db:
     helm:
       chart:
-        name: bitnami/postgresql
+        name: postgresql
         repo: https://charts.bitnami.com/bitnami
 
 
