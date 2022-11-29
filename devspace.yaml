@@ -10,7 +10,7 @@ pipelines:
     run: |-
       run_dependencies --all       # 1. Deploy any projects this project needs (see "dependencies")
       create_deployments --all     # 2. Deploy Helm charts and manifests specfied as "deployments"
-      start_dev app                # 3. Start dev mode "app" (see "dev" section)
+      start_dev front              # 3. Start dev mode "app" (see "dev" section)
   # You can run this pipeline via `devspace deploy` (or `devspace run-pipeline deploy`)
   deploy:
     run: |-
@@ -52,18 +52,21 @@ deployments:
       chart:
         name: postgresql
         repo: https://charts.bitnami.com/bitnami
-
+      values:
+        auth:
+          enablePostgresUser: true
+          postgresPassword: ""
 
 # This is a list of `dev` containers that are based on the containers created by your deployments
 dev:
-  app:
+  front:
     # Search for the container that runs this image
-    imageSelector: username/app
+    imageSelector: front:devspace-intro
     # Replace the container image with this dev-optimized image (allows to skip image building during development)
     devImage: ghcr.io/loft-sh/devspace-containers/alpine:3
     # Sync files between the local filesystem and the development container
     sync:
-      - path: ./
+      - path: ./react-front
     # Open a terminal and use the following command to start it
     terminal:
       command: ./devspace_start.sh
